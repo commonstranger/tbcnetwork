@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * Implementation of hook_theme.
+ */
+function tempmodule_theme($existing, $type, $theme, $path) {
+	$items = array(
+		'test_theme_function' => array(
+				'type' => 'module',
+				'render element' => 'element',
+		),
+	);
+	return $items;
+}
+
+function tempmodule_preprocess_page(&$variables) {
+	$variables['test_theme_content'] = array(
+		'#theme_wrappers' => array('test_theme_function'),
+		'#module' => 'tempmodule',
+		'content' => array(
+			'#markup' => t('TEST THEME CONTENT RENDERED'),
+		),
+	);
+}
+
+function theme_test_theme_function($variables) {
+	$element = $variables['element'];
+	return '<div>' . $element['#children'] . '</div>';
+}
+
+?>

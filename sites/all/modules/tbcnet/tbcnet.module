@@ -1,0 +1,352 @@
+<?php
+
+/**
+ * Implementation of hook_theme.
+ */
+function tbcnet_theme($existing, $type, $theme, $path) {
+	$items = array(
+		'tbcnet_release_panels' => array(
+				'type' => 'module',
+				'render element' => 'element',
+		),
+		'tbcnet_series_header' => array(
+                                'type' => 'module',
+                                'render element' => 'element',
+                ), 
+	);
+	return $items;
+}
+
+/**
+ * Adds a menu callback to the theme registry in order
+ * to customize the menu.
+ */
+function tbcnet_theme_registry_alter(&$theme_registry) {
+	$path = drupal_get_path('module', 'tbcnet');
+	$theme_registry['menu_tree']['function'] = '_tbcnet_menu_tree';
+}
+
+/**
+ * Simplifies the menu to accommodate Superfish.
+ */
+function _tbcnet_menu_tree(&$variables) {
+	return '<ul class="menu">' . $variables['tree'] . '</ul>';
+}
+
+/**
+ * Adds a page callback to facilitate customization 
+ * of the atxonomy terms pages.
+ */
+function tbcnet_menu_alter(&$items) {
+	if (!empty($items['taxonomy/term/%taxonomy_term'])) {
+		$items['taxonomy/term/%taxonomy_term']['page callback'] = '_tbcnet_custom_taxonomy_term_page';
+	}
+}
+
+/**
+ * Customizes taxonomy terms pages.
+ */
+function _tbcnet_custom_taxonomy_term_page($term) {
+
+	$build = taxonomy_term_page($term);
+	
+	/* Make customizations then return
+	// unset( $build['term_heading']['#prefix'] ); 
+	// unset( $build['term_heading']['#suffix'] );
+	// unset($build['term_heading']['term']['#term']->name);*/
+	return $build;
+}
+
+/**
+ * Implmenetation of hook_page_alter.
+ */
+function tbcnet_page_alter($page) {
+	if(drupal_is_front_page())
+		drupal_set_title('');
+}
+
+/**
+ * Implmenetation of hook_preprocess_page.
+ */
+function tbcnet_preprocess_page(&$variables) {
+	$base = drupal_get_path('module', 'tbcnet');
+	$node = NULL;
+	if(!empty($variables['node']))
+		$node = $variables['node'];
+
+	if(isset($node) && !empty($node->type) && $node->type == 'release') {
+		$term = field_get_items('node', $node, 'field_tags');
+		if(!empty($term) && isset($term[0]['taxonomy_term'])) {
+			$termname = $term[0]['taxonomy_term']->name;
+			$variables['node_term_name'] = $termname;
+			$variables['title_prefix'] = array(
+				'content' => array(
+					'#markup' => t($variables['node_term_name'] . ' -'),
+				),
+			
+			);
+			// Add series specific css if found
+			$sercss = $base.'/css/tbc-release-'.strtolower($termname).'.css';
+			if(file_exists($sercss)) {
+				drupal_add_css($sercss, array('group' => CSS_THEME, 'weight' => 4));
+			}
+		}
+	}
+	if($variables['is_front']) {
+		// Add home page css if found
+		$fcss = $base.'/css/tbc-front.css';
+		if(file_exists($fcss)) {
+			drupal_add_css($fcss, array('group' => CSS_THEME, 'weight' => 4));
+		}
+	}
+}
+
+/**
+ * Implementation of hook_preprocess_node.
+ */
+function tbcnet_preprocess_node(&$variables) {
+	global $user;
+	$base = drupal_get_path('module', 'tbcnet');
+	$node = $variables['node'];
+	switch($variables['type']) {
+		case 'release':
+			// Get the previous release if available
+			$query = db_select('node', 'n')
+                                ->condition('n.nid', $node->nid, '<')
+                                ->condition('n.type', 'release')
+                                ->fields('n', array('nid', 'type'))
+                                ->range(0, 1);
+                                $query->join('field_data_field_tags', 'f', 'f.entity_id = n.nid AND f.field_tags_tid = :tid', array(':tid' => 3));
+                        $result = $query->execute()->fetchCol();
+			if(count($result) > 0) {
+                                $prev = url('node/'.$result[0]);
+                        }
+			// Get the next relesase if available
+			$query = db_select('node', 'n')
+				->condition('n.nid', $node->nid, '>')
+				->condition('n.type', 'release')
+				->fields('n', array('nid', 'type'))
+				->range(0, 1);
+				$query->join('field_data_field_tags', 'f', 'f.entity_id = n.nid AND f.field_tags_tid = :tid', array(':tid' => 3));
+			$result = $query->execute()->fetchCol();
+			if(count($result) > 0) {
+				$next = url('node/'.$result[0]);
+			}
+			$boards = field_get_items('node', $node, 'field_boards');
+			$panels = array();
+			foreach($boards  as $board) {
+				$panel = node_load($board['target_id']);
+				$panelfld = field_get_items('node', $panel, 'field_panel');
+				$scorefld = field_get_items('node', $panel, 'field_score');
+				$score = node_load($scorefld[0]['target_id']);
+				if(is_object($score) && property_exists($score, 'field_audio')) {
+					$audio = $score->field_audio;
+					$loop = $score->field_loop;
+				}
+				$panels[$panelfld[0]['timestamp']] = array(
+									'panel' => file_create_url($panelfld[0]['uri']),
+									'score' => ((isset($audio) && !empty($audio)) ? file_create_url($audio['und'][0]['uri']) : 'none'),
+									'loop-score' => (isset($loop)) ? $loop['und'][0]['value'] : 0,
+									'id' => $panel->title,
+								);
+			unset($audio);
+			unset($loop);
+			}
+			// Add for the hell of it
+			$node->boards = $boards;
+			// Create the render array
+			$variables['release_panels'] = array(
+				'#theme_wrappers' => array('tbcnet_release_panels'),
+				'#module' => 'tbcnet',
+				'#prefix' => '<div id="tbcnet-release" class="flexslider"><ul class="slides">',
+ 				'#suffix' => '</ul></div>',
+				'#attached' => array(
+						'js' => array(
+								array(
+									'data' => $base . '/slide.js',
+									'options' => array(
+										'group' => JS_LIBRARY,
+										'preprocess' => TRUE,
+									),
+								),
+								array(
+                                                                         'data' => $base . '/jquery.flexslider.js',
+                                                                         'options' => array(
+                                                                                 'group' => JS_LIBRARY,
+                                                                                 'preprocess' => TRUE,
+                                                                         ),
+                                                                 ),
+								array(
+                                                                         'data' => $base . '/js/sonic.js',
+                                                                         'options' => array(
+                                                                                 'group' => JS_LIBRARY,
+                                                                                 'preprocess' => TRUE,
+                                                                         ),
+                                                                 ),
+						),
+						'css' => array(
+								array(
+									'data' => $base . '/tbc-flexslider.css',
+									'group' => CSS_THEME,
+									'weight' => 3,
+								),
+						),
+				),
+				'content' => array(
+					'items' => $panels,
+				),
+			);
+		break;
+	} 
+}
+
+//function tbcnet_node_view_alter()
+
+/**
+ * Implementation of hook_preproces_views_view.
+ *
+ */
+function tbcnet_preprocess_views_view(&$variables) {
+	$base = drupal_get_path('module', 'tbcnet');
+	$vocab;
+	$view = $variables['view'];
+	if(!empty($view) && property_exists($view, 'args') && !empty($view->args[0])) {
+		$tid = $view->args[0];
+		$term = entity_load('taxonomy_term', FALSE, array('tid' => $tid));
+
+		// We have a series vocabulary
+		if($term[$tid]->vocabulary_machine_name == "series") {
+			$image_field = field_get_items('taxonomy_term', $term[$tid], 'field_term_image');
+                	$term_image = file_create_url($image_field[0]['uri']);
+			$variables['tbcnet_series_term_image'] = array(
+                                '#theme_wrappers' => array('tbcnet_series_header'),
+                                '#module' => 'tbcnet',
+                                'content' => array(
+					'#markup' => $term_image,
+				),
+				
+			);
+			
+			// Nodes
+			if(!empty($view->result)) {
+				
+			}
+
+			// Add series specific css if found
+                        $sercss = $base.'/css/tbc-release-'.strtolower($term[$tid]->name).'.css';
+                        if(file_exists($sercss)) {
+                                drupal_add_css($sercss, array('group' => CSS_THEME, 'weight' => 4));
+                        }
+		}
+	}	
+}
+
+/**
+ * Implementation of hook_view_pre_render.
+ *
+ */
+function tbcnet_views_pre_render(&$view) {
+	// Stub
+}
+
+/**
+ * Implementation of hook_view_pre_view.
+ *
+ */
+function tbcnet_views_pre_view(&$view, &$display_id, &$args) {
+        // Stub
+}
+
+/**
+ * Theme function that generates the line item elements
+ * for a given release.
+ *
+ */
+function theme_tbcnet_release_panels($variables)
+{
+	$element = $variables['element'];
+	$items = $element['content']['items'];
+	$build = '';
+	if(!empty($items)) {
+		foreach($items as $key => $panel) {
+			if($key != '#children' && $key != '#printed') {
+				$panatt = 'src="'.$panel['panel'].'?'.mt_rand().'"';
+				$scratt = 'data-score="'.$panel['score'].'"';
+				$loopatt = 'data-loop-score="'.$panel['loop-score'].'"';
+				$build .= '<li><img id="'.$panel['id'].'" '.$panatt.' '.$scratt.' '.$loopatt.'/></li>';
+			}
+		}
+	}
+	return $build;
+}
+
+/**
+ * Theme function that generates the header image
+ * for a given series.
+ *
+ */
+function theme_tbcnet_series_header($variables) {
+	$element = $variables['element'];
+	$build = '<div id="tbcnet-series-header">';
+	$build .= '<img src="' . $element['#children'] . '"/>';
+	$build .= '</div>';
+	return $build;
+}
+// Keep as example
+/*function tbcnet_form_alter(&$form, $form_state, $form_id) {
+	*if (!empty($form['#node_edit_form']) && $form_id == 'release_node_form') {
+		$node = $form['#node'];
+		$form['filter_options'] = array(
+			'#type' => 'checkbox',
+			'#title' => t('Filter Board options'),
+			'#weight' => '2',
+			'#ajax' => array(
+				'callback' => 'tbcnet_ajax_field_boards',
+				'wrapper' => 'replace-boards-div',
+				'method' => 'replace',
+			),
+		);
+		$form['filter_options_text'] = array(
+			'#markup' => '<div class=\'description\'>Check to filter the board choices to the tags specified</div>',
+			'#weight' => '3'
+		);
+		
+		$options = array();
+		if(!empty($form_state['values']['filter_options'])) {
+			if($form_state['values']['filter_options'] == 1) {
+				$vocab = taxonomy_vocabulary_machine_name_load('Series');
+        			$terms = array_keys(entity_load('taxonomy_term', FALSE, array('vid'=>$vocab->vid)));
+        			if(!empty($form_state['values']['field_tags']['und']))
+        			{
+					$op = $form_state['values']['field_tags']['und'];
+					$nodes = array();
+                			foreach($op as $term) {
+						if($term['vocabulary_machine_name'] == 'series') {
+                        				$nodes = array_merge(node_load_multiple(taxonomy_select_nodes($term['tid'])));
+						}
+                			}
+					if(sizeof($nodes) >= 1) {
+                				foreach($nodes as $node) {
+                        				$options[] = t($node->title);
+                				}
+					}
+					else {
+						$options[] = t('No boards were found for the tags provided');
+					}
+        			}
+				else {
+					$options[] = t('No boards were found, or no tags were provided');
+				}
+			}
+		}
+		$form['field_boards']['#prefix'] = '<div id="replace-boards-div">';
+                $form['field_boards']['#suffix'] = '</div>';
+                $form['field_boards']['und']['#options'] = $options;
+	}
+}
+
+function tbcnet_ajax_field_boards($form, $form_state) {
+	return $form['field_boards'];
+}*/
+
+?>

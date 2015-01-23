@@ -1,0 +1,3 @@
+name = TBC Network
+description = Customizes a Drupal install according to the needs of TBC Network.
+core = 7.x

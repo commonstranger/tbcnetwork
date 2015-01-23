@@ -1,0 +1,19 @@
+/* TBC Network - Catalist Release CSS */
+
+body {
+  background: url(/sites/all/themes/nexus/images/bosscat-bg.jpg) repeat;
+}
+
+.preface-block a {
+  font-weight: bold;
+  color: #5b9aa3;
+}
+
+.flex-caption h2 {
+  text-shadow: 2px 2px 5px #666;
+}
+
+#slidebox a.frmore {
+  background: rgba(255, 255, 255, 0.3);
+  text-shadow: 1px 1px 3px #666;
+}

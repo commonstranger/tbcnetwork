@@ -1,0 +1,65 @@
+/* TBC Network - Catalist Release CSS */
+
+#tbcnet-release, #tbcnet-release.flexslider, ul.slides {
+  zoom: 0;
+  margin-bottom: 30px;
+}
+
+.flexslider .slides li {
+  max-height: 691px!important;
+}
+
+#content {
+
+}
+
+.page-node #content-wrap .slides img {
+  margin: 0;
+}
+
+.flex-direction-nav .flex-next {
+  right: 25px;
+}
+
+body {
+  background: url(/sites/all/themes/nexus/images/Catalist-BG2-5o.jpg) repeat;
+}
+
+h1.page-title {
+  color: #b1e7f0;
+}
+
+h1.page-title.tbcnet-page-release-title {
+  font-size: 95%;
+  margin: 2px 0 0 10px;
+  display: inline-block;
+  color: #aaa;
+}
+
+.audiocontrol-on, .audiocontrol-off {
+  width: 34px;
+  height: 18px;
+  display: inline-block;
+  margin: 0 0 0 10px;
+}
+
+.audiocontrol-on {
+  background-image: url('/sites/all/themes/nexus/images/sound-sm-aaa.png');
+  background-size: 70%;
+  background-repeat: no-repeat;
+}
+
+.audiocontrol-off {
+  background-image: url('/sites/all/themes/nexus/images/nosound-sm-aaa.png');
+  background-size: 70%;
+  background-repeat: no-repeat;
+}
+
+.sonic{
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 40%;
+  left: 47%;
+  z-index: 1000;
+}
