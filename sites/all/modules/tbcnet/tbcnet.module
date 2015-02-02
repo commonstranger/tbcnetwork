@@ -9,6 +9,10 @@ function tbcnet_theme($existing, $type, $theme, $path) {
 				'type' => 'module',
 				'render element' => 'element',
 		),
+		'tbcnet_release_navigation' => array(
+                                'type' => 'module',
+                                'render element' => 'element',
+				),
 		'tbcnet_series_header' => array(
                                 'type' => 'module',
                                 'render element' => 'element',
@@ -92,13 +96,6 @@ function tbcnet_preprocess_page(&$variables) {
 			}
 		}
 	}
-	if($variables['is_front']) {
-		// Add home page css if found
-		$fcss = $base.'/css/tbc-front.css';
-		if(file_exists($fcss)) {
-			drupal_add_css($fcss, array('group' => CSS_THEME, 'weight' => 4));
-		}
-	}
 }
 
 /**
@@ -161,43 +158,43 @@ function tbcnet_preprocess_node(&$variables) {
 				'#prefix' => '<div id="tbcnet-release" class="flexslider"><ul class="slides">',
  				'#suffix' => '</ul></div>',
 				'#attached' => array(
-						'js' => array(
-								array(
-									'data' => $base . '/slide.js',
-									'options' => array(
-										'group' => JS_LIBRARY,
-										'preprocess' => TRUE,
-									),
-								),
-								array(
-                                                                         'data' => $base . '/jquery.flexslider.js',
-                                                                         'options' => array(
-                                                                                 'group' => JS_LIBRARY,
-                                                                                 'preprocess' => TRUE,
-                                                                         ),
-                                                                 ),
-								array(
-                                                                         'data' => $base . '/js/sonic.js',
-                                                                         'options' => array(
-                                                                                 'group' => JS_LIBRARY,
-                                                                                 'preprocess' => TRUE,
-                                                                         ),
-                                                                 ),
+					'js' => array(
+						array(
+							'data' => $base . '/slide.js',
+							'options' => array(
+							'group' => JS_LIBRARY,
+							'preprocess' => TRUE,
+							),
 						),
-						'css' => array(
-								array(
-									'data' => $base . '/tbc-flexslider.css',
-									'group' => CSS_THEME,
-									'weight' => 3,
-								),
+						array(
+							'data' => $base . '/jquery.flexslider.js',
+							'options' => array(
+							'group' => JS_LIBRARY,
+							'preprocess' => TRUE,
+							),
 						),
+						array(
+							'data' => $base . '/js/sonic.js',
+							'options' => array(
+							'group' => JS_LIBRARY,
+							'preprocess' => TRUE,
+							),
+						),
+					),
+					'css' => array(
+						array(
+							'data' => $base . '/tbc-flexslider.css',
+							'group' => CSS_THEME,
+							'weight' => 3,
+						),
+					),
 				),
 				'content' => array(
 					'items' => $panels,
 				),
 			);
-		break;
-	} 
+				break;
+		} 
 }
 
 //function tbcnet_node_view_alter()

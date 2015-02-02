@@ -1,24 +1,61 @@
+/* TBC Network - Primary Theme Override CSS */
+@import "../partials/bootstrap/variables";
+@import "tbc_variables";
+
 body {
   font-family: $font-family-base;
   font-size: $font-size-base;
   line-height: $line-height-base;
-  color: $text-color;
+  color: #606060;
   background-color: #fff;
 }
-/*
+
 #masthead {
-  width: 100%;
+  background-image: url(../images/tbc-hdr-bg.png);
+  max-height: $header-maxheight;
+  @media (min-width: $screen-md-min) {
+    width: 100%;
+      position: absolute;
+      z-index: 1000;
+      padding: 10px 60px 60px;
+  }
 }
-*/
-/*#site-logo {
-  width: 260px;
-  height: 100px;
-  background: url('../images/tbc.png') 0 410px;
-  background-size: 185%;
+
+#masthead #site-logo {
+  @media(max-width: $screen-sm) {
+    padding-top: 0;
+    margin-bottom: 10px;
+    background: url(../images/tbc-logo-lt768.png);
+    width: 125px;
+    height: 64px;
+    img {
+      display: none;
+    }
+  }
 }
-#site-logo img {
-  display: none;
-}*/
+
+html body {
+  #page {
+    #primary {
+      @media(max-width: $screen-sm) { float: none; }
+    }
+    #main-content {
+      .aside-right .center {
+        @media(max-width: $screen-sm) { margin-right: 0; }
+      }
+      .aside-left .center { 
+        @media(max-width: $screen-sm) { margin-left: 0; }
+      }
+    }
+  }
+}
+
+.content-area.col-sm-12 {
+  @media (min-width: $screen-md-min) {
+    margin-top: 100px; 
+  }
+}
+
 .page-node #content-wrap .flexslider img {
   border: none;
 }
@@ -35,6 +72,11 @@ body {
 }
 .fcred {
   color: #fff;
+}
+
+// Navigation
+.mobilenavi {
+  margin-bottom: 15px;
 }
 
 /* From Nexus demo */
@@ -64,20 +106,25 @@ body {
 }
 
 #main-menu li a {
-    color: #777;
+    color: #313638;
     display: block;
     margin: 0;
     padding: 19px 10px 19px 10px;
     text-decoration: none;
     position: relative;
+    font-weight: bold;
 }
 
-#main-menu li a:hover, #main-menu li a:active, #main-menu a.active, #main-menu > ul > li > a.active-trail {
-    color: #ed564b;
+#main-menu li a:hover, #main-menu li a:active, #main-menu li a:hover.sf-with-ul, #main-menu li.sfHover a:hover, #main-menu > ul > li > a:hover.active-trail {
+    color: #39a1a1;
 }
 
-#main-menu li a.sf-with-ul {
+#main-menu li a.sf-with-ul  {
     padding-right: 10px;
+}
+
+#main-menu li a.sf-with-ul, #main-menu a.active, #main-menu > ul > li > a.active-trail {
+  color: #313638;  
 }
 
 #main-menu li ul li a, #main-menu li ul li a:link, #main-menu li ul li a:visited, #main-menu li ul li ul li a, #main-menu li ul li ul li a:link, #main-menu li ul li ul li a:visited, #main-menu li ul li ul li ul li a, #main-menu li ul li ul li ul li a:link, #main-menu li ul li ul li ul li a:visited {
@@ -95,7 +142,7 @@ body {
 }
 
 #main-menu li ul li a:hover, #main-menu li ul li ul li a:hover, #main-menu li ul li ul li ul li a:hover {
-    color: #ed564b;
+    color: #39a1a1;
 }
 
 #main-menu li ul {
@@ -133,7 +180,7 @@ body {
 }
 
 #main-menu > ul > li > a {
-    padding : 10px;
+    padding : 5px;
 }
 // Menu
 li.last.expanded.sfHover ul.menu {

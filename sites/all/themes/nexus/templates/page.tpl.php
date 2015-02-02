@@ -66,7 +66,7 @@
 ?>
 <?php
   if($is_front) { 
-    drupal_add_css(drupal_get_path('module', 'tbcnet') . '/tbc-flexslider.css', array('group' => CSS_THEME, 'weight' => 3));
+    drupal_add_css(drupal_get_path('theme', 'nexus') . '/css/tbc_front.css', array('group' => CSS_THEME, 'weight' => 3));
   }
 ?>
 <section id="page">
@@ -108,6 +108,7 @@
         <?php endif; ?>
       </div>
       <div class="col-sm-6 mainmenu">
+      	<div class="mobilenavi"></div>
         <nav id="navigation" role="navigation">
           <div id="main-menu">
             <?php 

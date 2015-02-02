@@ -1,0 +1,18 @@
+/* TBC Network - Front Page CSS */
+/* line 4, ../sass/tbc/_tbc_front.scss */
+body { background: url(/sites/all/themes/nexus/images/bosscat-bg.jpg) repeat; }
+
+/* line 8, ../sass/tbc/_tbc_front.scss */
+.preface-block a { font-weight: bold; color: #5b9aa3; }
+
+/* line 13, ../sass/tbc/_tbc_front.scss */
+.flex-caption h2 { text-shadow: 2px 2px 5px #666; }
+
+/* line 17, ../sass/tbc/_tbc_front.scss */
+#slidebox a.frmore { background: rgba(255, 255, 255, 0.3); text-shadow: 1px 1px 3px #666; }
+
+/* line 22, ../sass/tbc/_tbc_front.scss */
+.flex-direction-nav a { background: url(../images/bg_direction_nav_tbc.png); }
+
+/* line 26, ../sass/tbc/_tbc_front.scss */
+#main-menu { float: right; }

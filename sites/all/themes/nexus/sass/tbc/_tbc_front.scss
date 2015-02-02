@@ -1,4 +1,5 @@
 /* TBC Network - Front Page CSS */
+@import "../partials/bootstrap/variables";
 
 body {
   background: url(/sites/all/themes/nexus/images/bosscat-bg.jpg) repeat;
@@ -13,19 +14,15 @@ body {
   text-shadow: 2px 2px 5px #666;
 }
 
-#masthead {
-	@media (min-width: $screen-md-min) {
-		width: 100%;
-  		position: absolute;
-  		z-index: 1000;
-	}
-}
-
 #slidebox a.frmore {
   background: rgba(255, 255, 255, 0.3);
   text-shadow: 1px 1px 3px #666;
 }
 
+.flex-direction-nav a {
+    background: url(../images/bg_direction_nav_tbc.png);
+}
+
 #main-menu {
-	float: right;	
+  float: right; 
 }

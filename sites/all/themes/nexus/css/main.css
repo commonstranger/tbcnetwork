@@ -3226,7 +3226,7 @@ html body #page #main-content #header-block, html body #page #main-content #foot
 .region-content-top { margin-bottom: 20px; }
 
 /* line 1, ../sass/partials/_dev.sass */
-body.grid { background: url('../images/grid.png?1400685486') 50% 0px repeat-y; }
+body.grid { background: url('../images/grid.png?1422050174') 50% 0px repeat-y; }
 
 /* line 4, ../sass/partials/_dev.sass */
 .button_grid { position: absolute; left: 0px; top: 100px; padding: 10px; background: #FFC501; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: 1px solid #FE4B02; border-left: 0px; box-shadow: 1px 1px 10px #777; }
@@ -3272,7 +3272,7 @@ img { max-width: 100%; }
 /* line 1, ../sass/partials/_slide.sass */
 #slidebox { max-height: 550px; position: relative; background: #000; }
 /* line 5, ../sass/partials/_slide.sass */
-#slidebox .doverlay { background: url('../images/overlay.png?1400685486'); position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; z-index: 100; }
+#slidebox .doverlay { background: url('../images/overlay.png?1422050174'); position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; z-index: 100; }
 /* line 13, ../sass/partials/_slide.sass */
 #slidebox img.grayscale { filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale"); filter: gray; -webkit-filter: grayscale(100%); }
 /* line 17, ../sass/partials/_slide.sass */
@@ -3309,83 +3309,102 @@ img { max-width: 100%; }
 /* line 23, ../sass/partials/_footer.sass */
 .fcred a:link, .fcred a:visited { color: #fff; }
 
-/* line 1, ../sass/tbc/_tbc.scss */
-body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.42857; color: #333333; background-color: #fff; }
+/* TBC Network - Primary Theme Override CSS */
+/* line 5, ../sass/tbc/_ovrd_main.scss */
+body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.42857; color: #606060; background-color: #fff; }
 
-/*
-#masthead { width: 100%;
-}
-*/
-/*#site-logo { width: 260px; height: 100px; background: url('../images/tbc.png') 0 410px; background-size: 185%;
-}
-#site-logo img { display: none;
-}*/
-/* line 22, ../sass/tbc/_tbc.scss */
+/* line 13, ../sass/tbc/_ovrd_main.scss */
+#masthead { background-image: url(../images/tbc-hdr-bg.png); max-height: 125px; }
+@media (min-width: 992px) { /* line 13, ../sass/tbc/_ovrd_main.scss */
+  #masthead { width: 100%; position: absolute; z-index: 1000; padding: 10px 60px 60px; } }
+
+@media (max-width: 768px) { /* line 24, ../sass/tbc/_ovrd_main.scss */
+  #masthead #site-logo { padding-top: 0; margin-bottom: 10px; background: url(../images/tbc-logo-lt768.png); width: 125px; height: 64px; }
+  /* line 31, ../sass/tbc/_ovrd_main.scss */
+  #masthead #site-logo img { display: none; } }
+
+@media (max-width: 768px) { /* line 39, ../sass/tbc/_ovrd_main.scss */
+  html body #page #primary { float: none; } }
+@media (max-width: 768px) { /* line 43, ../sass/tbc/_ovrd_main.scss */
+  html body #page #main-content .aside-right .center { margin-right: 0; } }
+@media (max-width: 768px) { /* line 46, ../sass/tbc/_ovrd_main.scss */
+  html body #page #main-content .aside-left .center { margin-left: 0; } }
+
+@media (min-width: 992px) { /* line 53, ../sass/tbc/_ovrd_main.scss */
+  .content-area.col-sm-12 { margin-top: 100px; } }
+
+/* line 59, ../sass/tbc/_ovrd_main.scss */
 .page-node #content-wrap .flexslider img { border: none; }
 
-/* line 25, ../sass/tbc/_tbc.scss */
+/* line 62, ../sass/tbc/_ovrd_main.scss */
 #preface-area { background: none repeat scroll #a5d6de; border-top: 5px solid #a5d9e1; border-bottom: 5px solid #a5d9e1; }
 
-/* line 30, ../sass/tbc/_tbc.scss */
+/* line 67, ../sass/tbc/_ovrd_main.scss */
 .site-footer { background: #a5d6de; }
 
-/* line 33, ../sass/tbc/_tbc.scss */
+/* line 70, ../sass/tbc/_ovrd_main.scss */
 .flex-direction-nav a { background: url(../images/bg_direction_nav_tbc.png); }
 
-/* line 36, ../sass/tbc/_tbc.scss */
+/* line 73, ../sass/tbc/_ovrd_main.scss */
 .fcred { color: #fff; }
 
+/* line 78, ../sass/tbc/_ovrd_main.scss */
+.mobilenavi { margin-bottom: 15px; }
+
 /* From Nexus demo */
-/* line 41, ../sass/tbc/_tbc.scss */
+/* line 83, ../sass/tbc/_ovrd_main.scss */
 #main-menu { padding: 0px 0px; margin: 22px 0px 15px; height: 45px; border-bottom: none; float: left; }
 
-/* line 49, ../sass/tbc/_tbc.scss */
+/* line 91, ../sass/tbc/_ovrd_main.scss */
 #main-menu ul { width: auto; float: left; list-style: none; margin: 0; padding: 0 0px; }
 
-/* line 57, ../sass/tbc/_tbc.scss */
+/* line 99, ../sass/tbc/_ovrd_main.scss */
 #main-menu li { float: left; list-style: none; margin: 0; padding: 0; color: #fff; font-weight: 400; }
 
-/* line 66, ../sass/tbc/_tbc.scss */
-#main-menu li a { color: #39a1a1; display: block; margin: 0; padding: 19px 10px 19px 10px; text-decoration: none; position: relative; }
+/* line 108, ../sass/tbc/_ovrd_main.scss */
+#main-menu li a { color: #313638; display: block; margin: 0; padding: 19px 10px 19px 10px; text-decoration: none; position: relative; font-weight: bold; }
 
-/* line 75, ../sass/tbc/_tbc.scss */
-#main-menu li a:hover, #main-menu li a:active, #main-menu a.active, #main-menu > ul > li > a.active-trail, #main-menu li a.sf-with-ul:hover { color: #777; }
+/* line 118, ../sass/tbc/_ovrd_main.scss */
+#main-menu li a:hover, #main-menu li a:active, #main-menu li a:hover.sf-with-ul, #main-menu li.sfHover a:hover, #main-menu > ul > li > a:hover.active-trail { color: #39a1a1; }
 
-/* line 79, ../sass/tbc/_tbc.scss */
-#main-menu li a.sf-with-ul { padding-right: 10px; color: #39a1a1; }
+/* line 122, ../sass/tbc/_ovrd_main.scss */
+#main-menu li a.sf-with-ul { padding-right: 10px; }
 
-/* line 83, ../sass/tbc/_tbc.scss */
+/* line 126, ../sass/tbc/_ovrd_main.scss */
+#main-menu li a.sf-with-ul, #main-menu a.active, #main-menu > ul > li > a.active-trail { color: #313638; }
+
+/* line 130, ../sass/tbc/_ovrd_main.scss */
 #main-menu li ul li a, #main-menu li ul li a:link, #main-menu li ul li a:visited, #main-menu li ul li ul li a, #main-menu li ul li ul li a:link, #main-menu li ul li ul li a:visited, #main-menu li ul li ul li ul li a, #main-menu li ul li ul li ul li a:link, #main-menu li ul li ul li ul li a:visited { color: #777; width: 148px; margin: 0; padding: 10px 10px; border-top: 1px solid #ddd; position: relative; font-weight: 400; }
 
-/* line 93, ../sass/tbc/_tbc.scss */
+/* line 140, ../sass/tbc/_ovrd_main.scss */
 #main-menu ul li ul li:first-child a, #main-menu ul li ul li ul li:first-child a, #main-menu ul li ul li ul li ul li:first-child a { border-top: none; }
 
-/* line 97, ../sass/tbc/_tbc.scss */
+/* line 144, ../sass/tbc/_ovrd_main.scss */
 #main-menu li ul li a:hover, #main-menu li ul li ul li a:hover, #main-menu li ul li ul li ul li a:hover { color: #39a1a1; }
 
-/* line 101, ../sass/tbc/_tbc.scss */
+/* line 148, ../sass/tbc/_ovrd_main.scss */
 #main-menu li ul { font-size: 12px; z-index: 9999; position: absolute; left: -999em; height: auto; width: 160px; margin: 0px 0px 0px 0px; padding: 5px 5px; background: #efefef; }
 
-/* line 113, ../sass/tbc/_tbc.scss */
+/* line 160, ../sass/tbc/_ovrd_main.scss */
 #main-menu li ul a { width: 150px; }
 
-/* line 119, ../sass/tbc/_tbc.scss */
+/* line 166, ../sass/tbc/_ovrd_main.scss */
 #main-menu li ul ul { margin: -44px 0 0 160px; }
 
-/* line 123, ../sass/tbc/_tbc.scss */
+/* line 170, ../sass/tbc/_ovrd_main.scss */
 #main-menu li:hover ul ul, #main-menu li:hover ul ul ul, #main-menu li.sfHover ul ul, #main-menu li.sfHover ul ul ul { left: -999em; }
 
-/* line 127, ../sass/tbc/_tbc.scss */
+/* line 174, ../sass/tbc/_ovrd_main.scss */
 #main-menu li:hover ul, #main-menu li li:hover ul, #main-menu li li li:hover ul, #main-menu li.sfHover ul, #main-menu li li.sfHover ul, #main-menu li li li.sfHover ul { left: auto; }
 
-/* line 131, ../sass/tbc/_tbc.scss */
+/* line 178, ../sass/tbc/_ovrd_main.scss */
 #main-menu li:hover, #main-menu li.sfHover { position: static; }
 
-/* line 135, ../sass/tbc/_tbc.scss */
-#main-menu > ul > li > a { padding: 10px; }
+/* line 182, ../sass/tbc/_ovrd_main.scss */
+#main-menu > ul > li > a { padding: 5px; }
 
-/* line 139, ../sass/tbc/_tbc.scss */
+/* line 186, ../sass/tbc/_ovrd_main.scss */
 li.last.expanded.sfHover ul.menu { border: 1px solid #ddd; }
 
-/* line 142, ../sass/tbc/_tbc.scss */
+/* line 189, ../sass/tbc/_ovrd_main.scss */
 ul.menu li { margin: 0; padding: 0; }
