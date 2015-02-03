@@ -100,6 +100,7 @@
 
   <div class="content"<?php print $content_attributes; ?>>
     <?php
+      global $user;
       // Hide comments and links now so that we can render them later.
       hide($content['comments']);
       hide($content['links']);
@@ -111,6 +112,9 @@
       hide($content['field_release_date']);
       if($page) {
       	print render($release_panels);
+	if(!empty($node->body['und'][0]['value'])) {
+	  print $node->body['und'][0]['value'];
+	}
       }
       else {
 	print render($content);	

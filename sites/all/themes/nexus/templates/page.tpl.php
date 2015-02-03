@@ -135,7 +135,7 @@
     <div id="slidebox" class="flexslider">
       <ul class="slides">
         <li>
-          <a href="<?php print url($slide1_url)?>"><img class="" src="<?php print base_path() . drupal_get_path('theme', 'nexus') . '/images/slide-image-1.jpg'; ?>"/></a>
+          <a href="<?php print url($slide1_url)?>"><img class="" src="<?php print base_path() . drupal_get_path('theme', 'nexus') . '/images/fp-slides/slide-image-1.jpg'; ?>"/></a>
           <?php if($slide1_head || $slide1_desc) : ?>
             <div class="flex-caption">
               <h2><?php print $slide1_head; ?></h2><?php print $slide1_desc; ?>
@@ -144,7 +144,7 @@
           <?php endif; ?>
         </li>
         <li>
-          <a href="<?php print url($slide2_url)?>"><img class="" src="<?php print base_path() . drupal_get_path('theme', 'nexus') . '/images/slide-image-2.jpg'; ?>"/></a>
+          <a href="<?php print url($slide2_url)?>"><img class="" src="<?php print base_path() . drupal_get_path('theme', 'nexus') . '/images/fp-slides/slide-image-2.jpg'; ?>"/></a>
           <?php if($slide2_head || $slide2_desc) : ?>
             <div class="flex-caption">
               <h2><?php print $slide2_head; ?></h2><?php print $slide2_desc; ?>
@@ -153,7 +153,7 @@
           <?php endif; ?>
         </li>
         <!--<li>
-         <a href="<?php print url($slide3_url)?>"> <img class="" src="<?php print base_path() . drupal_get_path('theme', 'nexus') . '/images/slide-image-3.jpg'; ?>"/></a>
+         <a href="<?php print url($slide3_url)?>"> <img class="" src="<?php print base_path() . drupal_get_path('theme', 'nexus') . '/images/fp-slides/slide-image-3.jpg'; ?>"/></a>
           <?php if($slide3_head || $slide3_desc) : ?>
             <div class="flex-caption">
               <h2><?php print $slide3_head; ?></h2><?php print $slide3_desc; ?>
