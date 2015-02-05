@@ -3353,7 +3353,7 @@ body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 1
 
 /* From Nexus demo */
 /* line 83, ../sass/tbc/_ovrd_main.scss */
-#main-menu { padding: 0px 0px; margin: 22px 0px 15px; height: 45px; border-bottom: none; float: left; }
+#main-menu { padding: 0px 0px; margin: 22px 0px 15px; height: 45px; border-bottom: none; float: right; }
 
 /* line 91, ../sass/tbc/_ovrd_main.scss */
 #main-menu ul { width: auto; float: left; list-style: none; margin: 0; padding: 0 0px; }

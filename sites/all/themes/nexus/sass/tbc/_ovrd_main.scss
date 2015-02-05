@@ -14,7 +14,7 @@ body {
   background-image: url(../images/tbc-hdr-bg.png);
   max-height: $header-maxheight;
   @media (min-width: $screen-md-min) {
-    width: 100%;
+      width: 100%;
       position: absolute;
       z-index: 1000;
       padding: 10px 60px 60px;
@@ -85,7 +85,7 @@ html body {
     margin: 22px 0px 15px;
     height: 45px;
     border-bottom: none;
-    float: left;
+    float: right;
 }
 
 #main-menu ul {
