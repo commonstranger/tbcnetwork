@@ -16,7 +16,7 @@ body {
   @media (min-width: $screen-md-min) {
       width: 100%;
       position: absolute;
-      z-index: 1000;
+      z-index: 999;
       padding: 10px 60px 60px;
   }
 }
@@ -32,6 +32,10 @@ body {
       display: none;
     }
   }
+}
+
+body.admin > #page > #masthead {
+  z-index: 500;
 }
 
 html body {
